@@ -23,7 +23,7 @@ namespace ih
                const uint8& g,
                const uint8& b,
                const uint8& a)
-  : Color3(r, g, b), a(a);
+  : Color3(r, g, b), a(a) {};
 
   Color& Color::operator=(const Color3& right)
   {

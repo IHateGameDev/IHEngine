@@ -32,6 +32,7 @@ namespace ih
   void Engine::render()
   {
     BeginDrawing();
+    ClearBackground(BLACK);
     sceneManager.render();
     EndDrawing();
   }

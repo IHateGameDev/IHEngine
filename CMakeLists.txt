@@ -33,8 +33,8 @@ if(LIBRARY_CORE)
   install(TARGETS ih-engine-core
       DESTINATION lib)
 
-  install(DIRECTORY HEADERS_DIR
-      DESTINATION include/IHEngine/Core)
+  install(DIRECTORY ${HEADERS_DIR}
+      DESTINATION include/IHEngine/)
 endif()
 
 

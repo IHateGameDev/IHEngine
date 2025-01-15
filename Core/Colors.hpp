@@ -1,7 +1,7 @@
 #ifndef IH_COLORS_HPP
 #define IH_COLORS_HPP
 
-#include <IHSystem/rst>
+#include <IHSystem/settings.hpp>
 
 namespace ih
 {
@@ -29,12 +29,12 @@ namespace ih
     public:
       uint8 a;
 
-      Color(uint8 r,
-            uint8 g,
-            uint8 b,
-            uint8 a);
+      Color(const uint8& r,
+            const uint8& g,
+            const uint8& b,
+            const uint8& a);
 
-      Color& operator=(const Color& right);
+      Color& operator=(const Color3& right);
 
       #ifdef RAYLIB_H
         Color& operator=(const ::Color& right);
