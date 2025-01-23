@@ -1,4 +1,5 @@
-#include "../Engine/Scene.hpp"
+#include "../../Core/Scene.hpp"
+#include "../../Core/CyclePack.hpp"
 
 namespace ih
 {
@@ -10,7 +11,7 @@ namespace ih
 
   Scene::~Scene()
   {
-    for (uint16 i = 0; i < cyclePackCount; ++i)
+    for (uint16 i = 0; i < cyclePackCount; i++)
       delete cyclePacks[i];
       
     delete[] cyclePacks;
@@ -18,31 +19,31 @@ namespace ih
 
   void Scene::awake()
   {
-    for (uint16 i = 0; i < cyclePackCount; ++i)
+    for (uint16 i = 0; i < cyclePackCount; i++)
       cyclePacks[i]->awake();
   }
 
   void Scene::start()
   {
-    for (uint16 i = 0; i < cyclePackCount; ++i)
+    for (uint16 i = 0; i < cyclePackCount; i++)
       cyclePacks[i]->start();
   }
 
   void Scene::update()
   {
-    for (uint16 i = 0; i < cyclePackCount; ++i)
+    for (uint16 i = 0; i < cyclePackCount; i++)
       cyclePacks[i]->update();
   }
 
   void Scene::render()
   {
-    for (uint16 i = 0; i < cyclePackCount; ++i)
+    for (uint16 i = 0; i < cyclePackCount; i++)
       cyclePacks[i]->render();
   }
 
   void Scene::exit()
   {
-    for (uint16 i = 0; i < cyclePackCount; ++i)
+    for (uint16 i = 0; i < cyclePackCount; i++)
       cyclePacks[i]->exit();
   }
-}
+} // namespace ih

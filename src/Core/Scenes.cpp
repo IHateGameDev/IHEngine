@@ -1,5 +1,6 @@
-#include "../Engine/SceneManager.hpp"
+#include "../../Core/Scenes.hpp"
 #include <stdexcept>
+#include <raylib.h>
 
 namespace ih
 {
@@ -7,10 +8,10 @@ namespace ih
     SceneManager(Logger& logger): logger(logger){};
   #endif
 
-  void SceneManager::awake()
+  void Scenes::awake()
   {
     if (scenes.empty())
-      throw std::runtime_error("Core::Engine -> No scenes available to start");
+      throw std::runtime_error("Core::SceneManager -> No scenes available to start");
   
     #ifdef LOGGER
       logger.info("Core::SceneManager::awake -> Method has started", 6);
@@ -29,7 +30,7 @@ namespace ih
     #endif
   }
 
-  void SceneManager::start()
+  void Scenes::start()
   {
     #ifdef LOGGER
       logger.info("Core::SceneManager::start -> Method has started", 6);
@@ -42,7 +43,7 @@ namespace ih
     #endif
   }
 
-  void SceneManager::update()
+  void Scenes::update()
   {
     #ifdef LOGGER
       logger.info("Core::SceneManager::update -> Method has started", 6);
@@ -55,20 +56,22 @@ namespace ih
     #endif
   }
 
-  void SceneManager::render()
+  void Scenes::render()
   {
     #ifdef LOGGER
       logger.info("Core::SceneManager::render -> Method has started", 6);
     #endif
 
+    BeginDrawing();
     getCurrentScene().render();
-    
+    EndDrawing();
+
     #ifdef LOGGER
       logger.info("Core::SceneManager::render -> Method has ended", 6);
     #endif
   }
 
-  void SceneManager::exit()
+  void Scenes::exit()
   {
     #ifdef LOGGER
       logger.info("Core::SceneManager::exit -> Method has started", 6);
@@ -81,7 +84,7 @@ namespace ih
     #endif
   }
 
-  bool SceneManager::isValid(const uint16& index)
+  bool Scenes::isValid(const uint16& index)
   {
     bool res = index < scenes.size();
     
@@ -95,10 +98,10 @@ namespace ih
     return res;
   }
 
-  [[nodiscard]] Scene& SceneManager::createScene(uint16 count, CyclePack** packs)
-    { return scenes.emplace_back(count, packs); }
+  void Scenes::createScene(uint16 count, CyclePack** packs)
+    { scenes.emplace_back(count, packs); }
 
-  uint16 SceneManager::setScene(const uint16& index)
+  uint16 Scenes::setScene(const uint16& index)
   {
     if (isValid(index))
     {
@@ -114,7 +117,7 @@ namespace ih
     return currentScene;
   }
 
-  [[nodiscard]] Scene& SceneManager::getScene(const uint16& index)
+  [[nodiscard]] Scene& Scenes::getScene(const uint16& index)
   {
     if (isValid(index))
       return scenes.at(index);
@@ -122,7 +125,7 @@ namespace ih
     throw std::out_of_range("^^^ Core::SceneManager::getScene -> For return need ref");
   }
 
-  [[nodiscard]] Scene* SceneManager::tryGetScene(const uint16& index)
+  [[nodiscard]] Scene* Scenes::tryGetScene(const uint16& index)
   {
     if (isValid(index))
       return &scenes.at(index);
@@ -134,9 +137,9 @@ namespace ih
     return nullptr;
 }
 
-  [[nodiscard]] Scene& SceneManager::getCurrentScene()
+  [[nodiscard]] Scene& Scenes::getCurrentScene()
     { return scenes.at(currentScene); }
     
-  const uint16& SceneManager::getCurrentSceneIndex()
+  const uint16& Scenes::getCurrentSceneIndex()
     { return currentScene; }
 }

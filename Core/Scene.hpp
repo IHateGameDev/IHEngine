@@ -1,13 +1,13 @@
 #ifndef IH_SCENE_HPP
 #define IH_SCENE_HPP
 
-#include "CyclePack.hpp"
 #include <IHSystem/settings.hpp>
 
 namespace ih
 {
-  class SceneManager;
-  
+  class Scenes;
+  class CyclePack;
+
   class Scene
   {
     private:
@@ -24,7 +24,7 @@ namespace ih
       Scene(uint16 count, CyclePack** packs);
       ~Scene();
 
-      friend class SceneManager;
+      friend class Scenes;
   };
 }
 

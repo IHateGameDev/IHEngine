@@ -1,19 +1,19 @@
-#ifndef IH_ENTITIES_MANAGER_HPP
-#define IH_ENTITIES_MANAGER_HPP
+#ifndef IH_ENTITIES_HPP
+#define IH_ENTITIES_HPP
 
 #include <IHSystem/settings.hpp>
 #include <entt/entity/registry.hpp>
 
 namespace ih
 {
-  class EntitiesManager
+  class Entities
   {
     private:
       entt::registry registry;
 
     public:
-      inline entt::entity createEntity();
-      inline void destroyEntity(const entt::entity& entity);
+      entt::entity createEntity();
+      void destroyEntity(const entt::entity& entity);
       bool entityIsValid(const entt::entity& entity);
 
       template<typename Type, typename ...Args>
@@ -23,7 +23,7 @@ namespace ih
       [[nodiscard]] decltype(auto) createView();
 
       template<typename Type, typename ...Other>
-      inline size_t removeComponent(const entt::entity& entity);
+      size_t removeComponent(const entt::entity& entity);
 
       template<typename ...Type>
       [[nodiscard]] inline decltype(auto) getComponent([[maybe_unused]] const entt::entity& entity);
@@ -43,4 +43,4 @@ namespace ih
   };
 }
 
-#endif
+#endif // !IH_ENTITIES_HPP
